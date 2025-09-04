@@ -1,0 +1,49 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist/
+build/
+.out/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+logs/**/*.log
+
+# Environment variables
+.env
+.env.*          # .env.development, .env.production, etc.
+!.env.example   # keep example env
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Coverage / Testing
+coverage/
+.nyc_output/
+jest-stare/
+lcov-report/
+
+# Cache
+.cache/
+.tmp/
+.eslintcache
+.prettier-cache
