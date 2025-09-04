@@ -3,9 +3,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
+# Copy package files (includes package.json and package-lock.json)
 COPY package*.json ./
-COPY package-lock.json ./
 
 # Verify files are copied and show npm version
 RUN ls -la package* && npm --version
