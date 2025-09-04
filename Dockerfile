@@ -3,6 +3,9 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Update npm to latest version to support lockfileVersion 3
+RUN npm install -g npm@latest
+
 # Copy package files
 COPY package*.json ./
 
