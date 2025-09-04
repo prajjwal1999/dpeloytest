@@ -1,4 +1,6 @@
-# ---- Builder ----
+# --------------------
+# 1. Build Stage
+# --------------------
     FROM node:20-alpine AS builder
 
     WORKDIR /app
@@ -6,7 +8,7 @@
     # Copy package files
     COPY package*.json ./
     
-    # Install dependencies
+    # Install ALL dependencies (including devDeps so Nest CLI is available)
     RUN if [ -f package-lock.json ]; then \
           npm ci; \
         else \
@@ -16,6 +18,25 @@
     # Copy source code
     COPY . .
     
-    # Build the application (produces /app/dist)
+    # Build the application (creates /app/dist)
     RUN npm run build
+    
+    
+    # --------------------
+    # 2. Production Stage
+    # --------------------
+    FROM node:20-alpine
+    
+    WORKDIR /app
+    
+    # Copy only required files from builder
+    COPY --from=builder /app/package*.json ./
+    COPY --from=builder /app/node_modules ./node_modules
+    COPY --from=builder /app/dist ./dist
+    
+    # Expose the port Render will map
+    EXPOSE 3000
+    
+    # Start NestJS in production mode
+    CMD ["npm", "run", "start:prod"]
     
