@@ -5,6 +5,10 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
+COPY package-lock.json ./
+
+# Verify files are copied and show npm version
+RUN ls -la package* && npm --version
 
 # Install ALL dependencies (including devDependencies for build)
 RUN npm ci && npm cache clean --force
